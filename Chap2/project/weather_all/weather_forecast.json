@@ -1,0 +1,6 @@
+{                      'City':'basic.city',
+                        'Weather':'daily_forecast[i].cond.txt_n',
+                        'Wind':"daily_forecast[i].wind.dir",
+                        'Highest Temperature':"daily_forecast[i].tmp.max",
+                        'Last Updated On':'basic.update.utc',
+                        }

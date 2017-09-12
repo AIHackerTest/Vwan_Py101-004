@@ -1,0 +1,30 @@
+{% extends "base_wtf.html" %}
+{% block weather %}
+<p>
+  {% if weather_result %}
+      <br><strong> The current weather for {{city}} is:</strong><p>
+      {% for key, value in weather_result.items() %}
+        <b>{{key}}</b> : {{value}} <br>
+      {% endfor %}
+
+  {% endif %}
+</p>
+{% endblock %}
+
+{% block history %}
+<p>
+  {# set weather_search_history = weather_search_history|tojson #}
+  {% if weather_search_history %}
+      {% for key, value in weather_search_history.items() %}
+        <br><b>--------------Record No# {{key}}:</b> --------------<br>
+        {% for key, value in value.items() %}
+          <b>{{key}}</b> : {{value}} <br>
+        {% endfor %}
+      {% endfor %}
+  {% endif %}
+</p>
+{% endblock %}
+
+{% block help %}
+<p>{{help_text|safe}}</p>
+{% endblock %}

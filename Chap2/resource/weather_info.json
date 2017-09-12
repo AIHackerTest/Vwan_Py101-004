@@ -1,0 +1,6 @@
+{                      'City':'basic.city',
+                        'Weather':'now.cond.txt',
+                        'Wind':"now.wind.dir",
+                        'Temperature':"now.tmp",
+                        'Last Updated On':'basic.update.utc',
+                        }

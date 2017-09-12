@@ -1,0 +1,125 @@
+<html>
+<head>
+  <title> Weather Expert </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link type="text/css" href="{{url_for('static',filename='bootstrap/css/bootstrap.css')}}" rel="stylesheet"/>
+  <link type="text/css" href="{{url_for('static',filename='twitter/css/typeaheadjs.css')}}" rel="stylesheet"/>
+  <!-- <link type="text/css" href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet"/> -->
+  <link type="text/css" href="{{url_for('static',filename='custom/css/app.css')}}" rel="stylesheet"/>
+</head>
+<body>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2" align="center">
+        <p></p>
+      </div>
+      <div class="span12">
+        <div class="row">
+          <div class="col-md-2" id="left-panel"></div>
+          <div class="col-md-10" id="center-panel" vertical-align="baseline">
+            <form name="login" class="form-inline" action="/" method="POST">
+              <h1><legend>Sign In</legend></h1>
+              <div class="form-group">
+
+                {{ form.csrf_token }}
+                {{form.username.label}} {{form.username(size=50)}}
+                {{form.password.label}} {{form.password(size=50)}}
+                {{form.remember_me.label}} {{form.remember_me}}
+                <input class="btn-primary" type="submit" name="login" value="login">
+                <input class="btn-primary" type="submit" name="register" value="register">
+                {% if message %}
+                <p style="color:red">{{message}}</p>
+                {% endif %}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script src="{{url_for('static',filename='bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static',filename='jquery/js/jquery.min.js')}}"></script>
+<script src="{{url_for('static',filename='twitter/js/typeahead.bundle.js')}}"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+      // Defining the local dataset
+      var cities = ['上海','北京','Shanghai','beijing'];
+      // Constructing the suggestion engine
+      var cities = new Bloodhound({
+          datumTokenizer: Bloodhound.tokenizers.whitespace,
+          queryTokenizer: Bloodhound.tokenizers.whitespace,
+          local: cities
+          // // The url points to a json file that contains an array of country names
+          // prefetch: '/examples/data/countries.json'
+      });
+      // Initializing the typeahead
+      $('.typeahead').typeahead({
+          hint: true,
+          highlight: true, /* Enable substring highlighting */
+          minLength: 1 /* Specify minimum characters required for showing suggestions */
+      },
+      {   name: 'cities',
+          source: cities
+      });
+  });
+</script>
+<style>
+  input {
+      position: relative;
+      vertical-align: baseline !important;
+      background-color: transparent;
+  }
+
+  label{
+      border-radius: 1px;
+      font-size: 20px;
+    }
+
+  .typeahead, .tt-query, .tt-hint {
+  	border: 2px solid #CCCCCC;
+  	border-radius: 1px;
+  	font-size: 20px;
+  	/*height: 30px;
+  	line-height: 30px;*/
+  	/*outline: medium none;*/
+  	/*padding: 8px 12px;*/
+  	width: 300px;
+  }
+  .typeahead {
+  	background-color: #FFFFFF;
+  }
+  .typeahead:focus {
+  	border: 2px solid #0097CF;
+  }
+  .tt-query {
+  	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  }
+  .tt-hint {
+  	color: #999999;
+  }
+  .tt-menu {
+  	background-color: #FFFFFF;
+  	border: 1px solid rgba(0, 0, 0, 0.2);
+  	border-radius: 8px;
+  	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  	margin-top: 5px;
+  	padding: 8px 0;
+  	width: 422px;
+  }
+  .tt-suggestion {
+  	font-size: 22px;
+  	padding: 3px 20px;
+  }
+  .tt-suggestion:hover {
+  	cursor: pointer;
+  	background-color: #0097CF;
+  	color: #FFFFFF;
+  }
+  .tt-suggestion p {
+  	margin: 0;
+  }
+</style>
+</body>
+</html>
